@@ -1,0 +1,61 @@
+<script>
+function renderProductList(){
+
+    const productList = JSON.parse(window.localStorage.getItem("productList")) || [];
+
+    const productListEl = document.getElementById("productList");
+    productListEl.innerHTML = "";
+
+        for ( const product of productList){
+            const productEl = document.createElement("div");
+            productEl.innerHTML = "<div>" + 
+            "<h3>" + product.productName + "(" +product.category + ")</h3>" + 
+            (product.picture ? "<div><img width ='100px' height='100px' src='" + product.picture +"'/></div>" :"") +
+            "<p>" + product.description + "</p>" +
+            "<div><small>Kr " + product.price + "</small></div>" +  
+            "</div>"
+            productListEl.appendChild(productEl);
+        }
+}
+function handleSubmit(event){
+    event.preventDefault();
+
+    const productName = document.querySelector("[name='productName']").value;
+    const category = document.querySelector("[name='category']").value;
+    const price = document.querySelector("[name='price']").value; 
+    const description = document.querySelector("[name='description']").value;
+    const picture = document.querySelector("[name='picture']").files.item(0).name;
+
+    const product = {
+        productName, category, price, description, picture
+    };
+
+    const productList = JSON.parse(window.localStorage.getItem("productList")) || [];
+    productList.push(product);
+    window.localStorage.setItem("productList", JSON.stringify(productList));
+
+    event.target.reset();
+
+    renderProductList();
+}
+</script>
+
+<h1>Webshop</h1>
+
+<h2>Add a product</h2>
+
+<form onsubmit="handleSubmit(event)">
+    <input name="productName" placeholder="Name"/>
+    <input name ="category" placeholder="Category"/>
+    <input name ="price" placeholder="12.99"/>
+    <input type="file" name="picture" placeholder="Upload picture"/>
+    <textarea name="description" placeholder="Description"></textarea>
+    <input type="submit"/>
+</form>
+<h2>Here are the product</h2>
+<div id="productList"></div>
+
+<script>
+renderProductList();
+
+</script>
