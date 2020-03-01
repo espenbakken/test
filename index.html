@@ -1,3 +1,9 @@
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <title>Hei</title>
+</head>
+<body>
 <script>
 function renderProductList(){
 
@@ -45,7 +51,7 @@ function handleSubmit(event){
 <h2>Add a product</h2>
 
 <form onsubmit="handleSubmit(event)">
-    <input name="productName" placeholder="Name"/>
+    <input name="productName" label="Name" placeholder="Name"/>
     <input name ="category" placeholder="Category"/>
     <input name ="price" placeholder="12.99"/>
     <input type="file" name="picture" placeholder="Upload picture"/>
@@ -59,3 +65,5 @@ function handleSubmit(event){
 renderProductList();
 
 </script>
+</body>
+</html>
